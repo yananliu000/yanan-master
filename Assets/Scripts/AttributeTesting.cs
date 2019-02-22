@@ -9,8 +9,10 @@ public class AttributeTesting : MonoBehaviour
 {
     [Header("Attribute Testing")] //Header Attribute
     [Tooltip("Health value between 0 and 100.")] //tooltip Attribute: will show the tooltip when hover it in the editor menu
-    [Range(0,100)]  //Range Attribute: make the variable have range
+    public int maxHealth = 100;
+    [Range(0, 100)]  //Range Attribute: make the variable have range
     public int health = 0;
+
 
     [Space(10)] // Space Attribute: 10 pixels of spacing here.
     public int damage = 0;

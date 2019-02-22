@@ -11,6 +11,8 @@ public class LinqTesting : MonoBehaviour
     void Start()
     {
         others = GameObject.FindObjectsOfType<AttributeTesting>();
+        GetHealthLowerThanValue(100);
+        GetHealthHigherThanPercent(80);
     }
 
     // Update is called once per frame
@@ -20,6 +22,7 @@ public class LinqTesting : MonoBehaviour
     }
 
     //In LoL, some abilities will cause extra damage to low health characters 
+    //A new thing i learn is that if the object has two of the attribute component, the message will print twice
     public void GetHealthLowerThanValue(int value)
     {
         //create query
@@ -35,19 +38,20 @@ public class LinqTesting : MonoBehaviour
         }
     }
 
-    //is there any shortcut way to get the attribute range of health?
-    public void GetHealthHigherThanPercent(float percent)
+    // can i use a variable to set the range?   
+    //is there any way to get the attribute range number?
+    public void GetHealthHigherThanPercent(int percentage)
     {
         //create query
-        //var Query =
-        //    from item in others
-        //    where item.health < 
-        //    select item;
-        //
+        var Query =
+            from item in others
+            where item.health < item.maxHealth* percentage/100
+            select item;
+        
         ////exe
-        //foreach (var item in Query)
-        //{
-        //    Debug.Log("Object: " + item.name + "'s health is below: " + value);
-        //}
+        foreach (var item in Query)
+        {
+            Debug.Log("Object: " + item.name + "'s health percent is above: " + percentage + "%");
+        }
     }
 }
