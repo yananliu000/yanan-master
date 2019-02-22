@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class ExtensionTesting : MonoBehaviour
 {
+    private Object[] ordered_others;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.ResetTransformation();
+        //ordered_others = gameObject.FindOrderedObjectsOfType();
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 }
 
@@ -30,5 +32,15 @@ public static class ExtensionMethods
         trans.localRotation = Quaternion.identity;
 
         trans.localScale = new Vector3 (1,1,1);
+        var others = GameObject.FindObjectsOfType<AttributeTesting>();
     }
+
+
+    //will return a list of objects ordered by ID
+    //public static T[] FindOrderedObjectsOfType<T>(this GameObject mb)
+    //{
+    //    //T[] unordered_objects = GameObject.FindObjectsOfType<T>();
+    //    //return unordered_objects;
+    //}
+    
 }

@@ -6,6 +6,8 @@ using System.Linq; //must include to use the functionalities
 public class LinqTesting : MonoBehaviour
 {
     private AttributeTesting[] others;
+   
+
 
     // Start is called before the first frame update
     void Start()

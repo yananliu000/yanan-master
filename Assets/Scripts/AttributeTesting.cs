@@ -12,7 +12,7 @@ public class AttributeTesting : MonoBehaviour
     public int maxHealth = 100;
     [Range(0, 100)]  //Range Attribute: make the variable have range
     public int health = 0;
-
+    public int ID = 0;
 
     [Space(10)] // Space Attribute: 10 pixels of spacing here.
     public int damage = 0;
