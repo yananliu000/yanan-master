@@ -20,6 +20,7 @@ public class ExtensionTesting : MonoBehaviour
 
 public static class ExtensionMethods
 {
+    //variadic templates
     //return objects with both the component types
     public static GameObject[] FindObjectsOfTypes<T, U>(this GameObject obj)
     {
