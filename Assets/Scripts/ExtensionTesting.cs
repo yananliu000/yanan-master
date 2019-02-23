@@ -1,46 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ExtensionTesting : MonoBehaviour
 {
-    private Object[] ordered_others;
+    private Object[] others;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.ResetTransformation();
-        //ordered_others = gameObject.FindOrderedObjectsOfType();
+        others = this.gameObject.FindObjectsOfTypes<AttributeTesting, LinqTesting>();
     }
 
-    // Update is called once per frame
     void Update()
     {
     }
 }
 
-//Extension Methods!
-//must be static: both class and function
-//this representes where the original function come from 
 public static class ExtensionMethods
 {
-    //reset the obj position to user-defined v3
-    public static void ResetTransformation(this Transform trans)
+    //return objects with both the component types
+    public static GameObject[] FindObjectsOfTypes<T, U>(this GameObject obj)
     {
-        Debug.Log("extented");
-        trans.position = Vector3.zero;
-        trans.localRotation = Quaternion.identity;
+        //get all components of the scene
+        MonoBehaviour[] all = GameObject.FindObjectsOfType<MonoBehaviour>();
 
-        trans.localScale = new Vector3 (1,1,1);
-        var others = GameObject.FindObjectsOfType<AttributeTesting>();
+        //add them into the set: avoid multiple adding
+        HashSet<GameObject> results = new HashSet<GameObject>();
+
+        foreach(MonoBehaviour mb in all)
+        {
+            if(mb.GetComponent<T>() != null && mb.GetComponent<U>() != null)
+            {
+                results.Add(mb.gameObject);
+            }
+        }
+        return results.ToArray();
     }
 
+    //for static methods, cannot extend
+    //can make a wrapper class that extends the functionality of static classes ()
 
-    //will return a list of objects ordered by ID
-    //public static T[] FindOrderedObjectsOfType<T>(this GameObject mb)
-    //{
-    //    //T[] unordered_objects = GameObject.FindObjectsOfType<T>();
-    //    //return unordered_objects;
-    //}
-    
 }
