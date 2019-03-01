@@ -16,10 +16,12 @@ public static class MultiTagSystemMethods
     //false: not
 
     //array of strings
+    /*
     public static bool IsHasAllTags(this GameObject obj)
     {
         MultiTagSystem multitag = obj.GetComponent<MultiTagSystem>();
         if(mul)
         return false;
     }
+    */
 }

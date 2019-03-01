@@ -42,5 +42,4 @@ public static class ExtensionMethods
 
     //for static methods, cannot extend
     //can make a wrapper class that extends the functionality of static classes ()
-
 }
