@@ -28,9 +28,11 @@ public class CharacterSpawner : MonoBehaviour
 
     void SpawnCharacter()
     {
+        Application.logMessageReceived += CustomLog_Warning;
+        Debug.Log("Spawn New!");
+
         //spawn pieces
         List<GameObject> bodyPieces = new List<GameObject>();
-        Debug.Log("Spawn New!");
         bodyPieces.Add(GameObject.CreatePrimitive(PrimitiveType.Sphere)); //head
         bodyPieces.Add(GameObject.CreatePrimitive(PrimitiveType.Cube)); //body
         bodyPieces.Add(GameObject.CreatePrimitive(PrimitiveType.Cylinder)); //arm
@@ -62,4 +64,11 @@ public class CharacterSpawner : MonoBehaviour
         bodyPieces[4].transform.localScale -= new Vector3(0.25f, 0.25f, 0.25f);
         bodyPieces[5].transform.localScale -= new Vector3(0.25f, 0.25f, 0.25f);
     }
+
+    //how to pass a gameobj as a parameter to this???
+    private void CustomLog_Warning(string s, string c, LogType l)
+    {
+        print("<color=green>LogType: </color>" + l + "<color=green> ;LogInfo: </color>" + "<color=red> Warning: </color>"+ s);
+    }
 }
+
