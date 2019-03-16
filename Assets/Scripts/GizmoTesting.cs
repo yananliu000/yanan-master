@@ -7,31 +7,25 @@ public class GizmoTesting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void OnDrawGizmos()
     {
-        // Draw a yellow sphere at the transform's position
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(transform.position, 1);
     }
 
     void OnDrawGizmosSelected()
     {
-        /*
-        // Draws a 5 unit long red line in front of the object
-        Gizmos.color = Color.red;
-        Vector3 direction = transform.TransformDirection(Vector3.forward) * 5;
-        Gizmos.DrawRay(transform.position, direction);
-        */
+        DrawVisionFrustum();
+        //DrawVisionLines();
+    }
 
+    void DrawVisionLines()
+    {
         float totalFOV = 70.0f;
         float rayRange = 10.0f;
         float halfFOV = totalFOV / 2.0f;
@@ -41,10 +35,47 @@ public class GizmoTesting : MonoBehaviour
         Vector3 rightRayDirection = rightRayRotation * transform.forward;
         Gizmos.DrawRay(transform.position, leftRayDirection * rayRange);
         Gizmos.DrawRay(transform.position, rightRayDirection * rayRange);
-
-        //Gizmos.DrawFrustum
-        //DrawSolidArc
-        //GUI.HorizontalSlider(new Rect(20, 20, 100, 40), m_FieldOfView, min, max);
-        //DrawGUITexture
     }
+
+    void DrawVisionFrustum()
+    {
+        float fov = 50.0f;
+        float aspect = 1.5f;
+        float maxRange = 7.5f;
+        float minRange = 1.0f;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+        Gizmos.DrawFrustum(Vector3.zero, fov, maxRange, minRange, aspect);
+
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Gizmos.matrix);
+        
+        GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Cube");
+        foreach (GameObject go in allObjects)
+        {
+            Collider coll = go.GetComponent<Collider>();
+            if (coll)
+            {
+                bool pass = true;
+                for(int i = 0; i < planes.Length; ++i)
+                {
+                    if (!planes[i].GetSide(go.transform.position))
+                    {
+                        pass = false;
+                    }
+                }
+
+                if(pass)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawSphere(go.transform.position, 0.2f);
+                }
+            }
+        }
+
+  
+    }
+
 }
+
+
