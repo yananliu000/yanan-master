@@ -1,2 +1,0 @@
-The inspector I designed is for displaying the battle information: the damage percentage of the character compared with all other characters.
-The tool can help the developers to know the damage data while the game running and help them to balance the game.  
