@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class unoptimizeTesting : MonoBehaviour
+public class UnoptimizeTesting : MonoBehaviour
 {
     public bool m_isActivated = true;
     // Start is called before the first frame update
@@ -38,7 +38,7 @@ public class unoptimizeTesting : MonoBehaviour
 
     public void BroadcastMe()
     {
-        Debug.Log("unoptimizeTesting succeed");
+        Debug.Log("UnoptimizeTesting succeed");
     }
 
 }

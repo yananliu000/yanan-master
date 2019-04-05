@@ -16,11 +16,12 @@ public class GizmoTesting : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        DrawVisionFrustum();
+
     }
 
     void OnDrawGizmosSelected()
     {
-        DrawVisionFrustum();
         //DrawVisionLines();
     }
 
@@ -68,15 +69,13 @@ public class GizmoTesting : MonoBehaviour
                 if(pass)
                 {
                     Gizmos.color = Color.red;
-                    Gizmos.DrawSphere(go.transform.position, 0.2f);
+                    Vector3 higher = new Vector3(0, 1.0f, 0);
+                    Gizmos.DrawSphere(go.transform.position - this.transform.position + higher , 0.2f);
+                    Debug.Log(go.name);
                 }
             }
         }
-
-  
     }
-
-   
 }
 
 
